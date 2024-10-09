@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMealPeriods, setSelectedMealPeriod } from '../features/mealPeriods/mealPeriodsSlice';
+import { fetchMealPeriods, setSelectedMealPeriod, clearMealPeriods } from '../features/mealPeriods/mealPeriodsSlice';
+import { clearMeals } from '../features/meals/mealsSlice';
 
-const MealPeriodsList = () => {
+const MealPeriodsList = ({ selectedLocation }) => {
   const dispatch = useDispatch();
   const mealPeriods = useSelector((state) => state.mealPeriods.mealPeriods);
   const selectedMealPeriod = useSelector((state) => state.mealPeriods.selectedMealPeriod);
@@ -10,17 +11,19 @@ const MealPeriodsList = () => {
   const error = useSelector((state) => state.mealPeriods.error);
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchMealPeriods());
+    if (selectedLocation) {
+      dispatch(fetchMealPeriods(selectedLocation.id));
+      dispatch(clearMealPeriods()); // Clear meal periods if new location is selected
+      dispatch(clearMeals()); // Clear meals when location changes
     }
-  }, [status, dispatch]);
+  }, [selectedLocation, dispatch]);
 
   const handleSelectMealPeriod = (mealPeriod) => {
     dispatch(setSelectedMealPeriod(mealPeriod));
   };
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <div>Loading meal periods...</div>;
   }
 
   if (status === 'failed') {
@@ -30,22 +33,17 @@ const MealPeriodsList = () => {
   return (
     <div>
       <h2>Select a Meal Period</h2>
-      <div className="meal-periods-container">
-        {mealPeriods.map((mealPeriod) => (
-          <button
-            key={mealPeriod.id}
-            onClick={() => handleSelectMealPeriod(mealPeriod)}
-            className={`meal-period-button ${selectedMealPeriod?.id === mealPeriod.id ? 'selected' : ''}`}
-          >
-            {mealPeriod.name}
-          </button>
-        ))}
-      </div>
-
-      {selectedMealPeriod && (
-        <div style={{ marginTop: '20px' }}>
-          <h3>Selected Meal Period:</h3>
-          <p>{selectedMealPeriod.name}</p>
+      {selectedLocation && (
+        <div className="meal-periods-container">
+          {mealPeriods.map((mealPeriod) => (
+            <button
+              key={mealPeriod.id}
+              onClick={() => handleSelectMealPeriod(mealPeriod)}
+              className={`meal-period-button ${selectedMealPeriod?.id === mealPeriod.id ? 'selected' : ''}`}
+            >
+              {mealPeriod.name}
+            </button>
+          ))}
         </div>
       )}
     </div>
