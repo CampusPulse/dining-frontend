@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Replace with the actual API URL for meal periods
 const API_URL_MEAL_PERIODS = 'https://api.fdmealplanner.com/meal-periods';
 
-// Thunk to fetch meal periods
-export const fetchMealPeriods = createAsyncThunk('mealPeriods/fetchMealPeriods', async () => {
-  const response = await fetch(API_URL_MEAL_PERIODS);
-  const data = await response.json();
-  return data;
-});
+// Thunk to fetch meal periods based on location
+export const fetchMealPeriods = createAsyncThunk(
+  'mealPeriods/fetchMealPeriods',
+  async (locationId) => {
+    const response = await fetch(`${API_URL_MEAL_PERIODS}?locationId=${locationId}`);
+    const data = await response.json();
+    return data;
+  }
+);
 
 const mealPeriodsSlice = createSlice({
   name: 'mealPeriods',
@@ -16,11 +18,15 @@ const mealPeriodsSlice = createSlice({
     mealPeriods: [],
     status: 'idle',
     error: null,
-    selectedMealPeriod: null, // Added selectedMealPeriod
+    selectedMealPeriod: null,
   },
   reducers: {
     setSelectedMealPeriod(state, action) {
       state.selectedMealPeriod = action.payload;
+    },
+    clearMealPeriods(state) {
+      state.mealPeriods = [];
+      state.selectedMealPeriod = null;
     }
   },
   extraReducers: (builder) => {
@@ -39,5 +45,5 @@ const mealPeriodsSlice = createSlice({
   }
 });
 
-export const { setSelectedMealPeriod } = mealPeriodsSlice.actions; // Export action
+export const { setSelectedMealPeriod, clearMealPeriods } = mealPeriodsSlice.actions;
 export default mealPeriodsSlice.reducer;
