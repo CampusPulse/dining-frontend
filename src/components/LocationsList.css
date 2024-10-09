@@ -1,0 +1,28 @@
+.locations-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.location-button {
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	font-size: 16px;
+}
+
+.location-button:hover {
+	background-color: #45a049;
+}
+
+.location-button.selected {
+	background-color: #0080ff;
+}
+
+.location-button.selected:hover {
+	background-color: #1976d2;
+}

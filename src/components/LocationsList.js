@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLocations, setSelectedLocation } from '../features/locations/locationsSlice';
+import './LocationsList.css'; // Import the CSS
 
 const LocationsList = () => {
   const dispatch = useDispatch();
@@ -30,13 +31,18 @@ const LocationsList = () => {
   return (
     <div>
       <h2>Select a Location</h2>
-      <ul>
+      <div className="locations-container">
         {locations.map((location) => (
-          <li key={location.locationId} onClick={() => handleSelectLocation(location)}>
+          <button
+            key={location.locationId}
+            onClick={() => handleSelectLocation(location)}
+            className={`location-button ${selectedLocation?.locationId === location.locationId ? 'selected' : ''}`}
+          >
             {location.locationName}
-          </li>
+          </button>
         ))}
-      </ul>
+      </div>
+
       {selectedLocation && (
         <div style={{ marginTop: '20px' }}>
           <h3>Selected Location:</h3>
