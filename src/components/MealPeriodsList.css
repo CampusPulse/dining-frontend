@@ -1,0 +1,28 @@
+.meal-periods-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.meal-period-button {
+	background-color: #ff5722;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	font-size: 16px;
+}
+
+.meal-period-button:hover {
+	background-color: #e64a19;
+}
+
+.meal-period-button.selected {
+	background-color: #2196f3;
+}
+
+.meal-period-button.selected:hover {
+	background-color: #1976d2;
+}
