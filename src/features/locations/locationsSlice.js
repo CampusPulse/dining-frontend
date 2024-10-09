@@ -22,9 +22,14 @@ const locationsSlice = createSlice({
   initialState: {
     locations: [],
     status: 'idle',
-    error: null
+    error: null,
+    selectedLocation: null,  // Added selectedLocation
   },
-  reducers: {},
+  reducers: {
+    setSelectedLocation(state, action) {
+      state.selectedLocation = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchLocations.pending, (state) => {
@@ -41,4 +46,5 @@ const locationsSlice = createSlice({
   }
 });
 
+export const { setSelectedLocation } = locationsSlice.actions; // Export action
 export default locationsSlice.reducer;
