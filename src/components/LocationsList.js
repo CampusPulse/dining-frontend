@@ -27,8 +27,8 @@ const LocationsList = () => {
       <h2>Locations</h2>
       <ul>
         {locations.map((location) => (
-          <li key={location.id}>
-            {location.name} - {location.address}
+          <li key={location.locationId}>
+            {location.locationName}
           </li>
         ))}
       </ul>
