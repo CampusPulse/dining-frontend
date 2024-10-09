@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Replace with the actual API URL for meals
 const API_URL_MEALS = 'https://api.fdmealplanner.com/meals';
 
-// Thunk to fetch meals
-export const fetchMeals = createAsyncThunk('meals/fetchMeals', async () => {
-  const response = await fetch(API_URL_MEALS);
-  const data = await response.json();
-  return data;
-});
+// Thunk to fetch meals based on meal period and location
+export const fetchMeals = createAsyncThunk(
+  'meals/fetchMeals',
+  async ({ locationId, mealPeriodId }) => {
+    const response = await fetch(`${API_URL_MEALS}?locationId=${locationId}&mealPeriodId=${mealPeriodId}`);
+    const data = await response.json();
+    return data;
+  }
+);
 
 const mealsSlice = createSlice({
   name: 'meals',
@@ -16,11 +18,15 @@ const mealsSlice = createSlice({
     meals: [],
     status: 'idle',
     error: null,
-    selectedMeal: null, // Added selectedMeal
+    selectedMeal: null,
   },
   reducers: {
     setSelectedMeal(state, action) {
       state.selectedMeal = action.payload;
+    },
+    clearMeals(state) {
+      state.meals = [];
+      state.selectedMeal = null;
     }
   },
   extraReducers: (builder) => {
@@ -39,5 +45,5 @@ const mealsSlice = createSlice({
   }
 });
 
-export const { setSelectedMeal } = mealsSlice.actions; // Export action
+export const { setSelectedMeal, clearMeals } = mealsSlice.actions;
 export default mealsSlice.reducer;
