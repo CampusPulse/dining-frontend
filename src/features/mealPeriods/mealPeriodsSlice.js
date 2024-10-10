@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API_URL_MEAL_PERIODS = 'https://api.fdmealplanner.com/meal-periods';
+const API_URL_MEAL_PERIODS = 'https://apiservicelocators.fdmealplanner.com/api/v1/data-locator-webapi/20/mealPeriods?IsActive=1';
 
 // Thunk to fetch meal periods based on location
 export const fetchMealPeriods = createAsyncThunk(
   'mealPeriods/fetchMealPeriods',
   async (locationId) => {
-    const response = await fetch(`${API_URL_MEAL_PERIODS}?locationId=${locationId}`);
+    const response = await fetch(`${API_URL_MEAL_PERIODS}&LocationId=${locationId}`);
     const data = await response.json();
-    return data;
+    return data["data"];
   }
 );
 

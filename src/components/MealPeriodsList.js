@@ -41,7 +41,7 @@ const MealPeriodsList = ({ selectedLocation }) => {
               onClick={() => handleSelectMealPeriod(mealPeriod)}
               className={`meal-period-button ${selectedMealPeriod?.id === mealPeriod.id ? 'selected' : ''}`}
             >
-              {mealPeriod.name}
+              {mealPeriod.mealPeriodName}
             </button>
           ))}
         </div>

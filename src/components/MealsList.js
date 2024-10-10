@@ -11,7 +11,7 @@ const MealsList = ({ selectedLocation, selectedMealPeriod }) => {
 
   useEffect(() => {
     if (selectedLocation && selectedMealPeriod) {
-      dispatch(fetchMeals({ locationId: selectedLocation.id, mealPeriodId: selectedMealPeriod.id }));
+      dispatch(fetchMeals({ locationId: selectedLocation.locationId, mealPeriodId: selectedMealPeriod.id }));
       dispatch(clearMeals()); // Clear meals when new meal period is selected
     }
   }, [selectedLocation, selectedMealPeriod, dispatch]);
