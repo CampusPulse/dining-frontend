@@ -7,7 +7,7 @@ The code present in the repo is not that close to a complete app per this initia
 The project was abandoned at such an early stage because of both a lack of time to work on it, and because of FDMealPlanners terms of service. There is nothing that would prevent this project from achieving its original vision should someone with the right motivations and willingness to put in the work find this repository.
 
 
-
+The way this code interacts with the FDMealPlanner API is inspired by the code available in https://github.com/jdeath/fdmealplanner/tree/d7df5862275227cf7e1d7dae400114e32baf3328
 
 
 
