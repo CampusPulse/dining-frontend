@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+# FDMealPlanner UI
+
+This project Was intended to be an alternative frontend for the FDMealPlanner interface to make it more accessible and easier to browse the available food options.
+
+The code present in the repo is not that close to a complete app per this initial vision, but the code that *is* present (mostly just selecting a location, meal, and menu and querying the API) *does work*.
+
+The project was abandoned at such an early stage because of both a lack of time to work on it, and because of FDMealPlanners terms of service. There is nothing that would prevent this project from achieving its original vision should someone with the right motivations and willingness to put in the work find this repository.
+
+
+
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
